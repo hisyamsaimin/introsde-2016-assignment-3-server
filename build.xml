@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
     <!-- ================================= 
     Introduction to Service Design and Engineering Laboratory
-    Description: ANT build script for assignment 3
-   
+    Description: Build file for tge local database service 
+ 
     
     Notes: 
     
@@ -15,7 +15,7 @@
        # The target "download-ivy" and "install-ivy" will download the ivy jar and place it in the "ivy" folder
        # 
 -->
-    <project name="assignment3" default="install" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
+    <project name="LocalDatabaseService" basedir="." xmlns:ivy="antlib:org.apache.ivy.ant">
         <!-- PART 1: Ivy properties, download, installation and configuration -->
         <property name="ivy.install.version" value="2.4.0-rc1" />
         <property name="ivy.jar.dir" value="${basedir}/ivy" />
@@ -72,13 +72,11 @@
             </fileset>
         </path>
         <!-- PART 3: compilation and execution targets for this session -->
-        <!-- target for init -->
         <target name="init" depends="install-ivy, resolve">
             <echo message="Init has been called" />
             <mkdir dir="${build.dir}" />
             <echo message="${build.dir} has been created" />
         </target>
-        <!-- target for cleaning project -->
         <target name="clean">
             <echo message="Clean has been called" />
             <delete dir="${build.dir}" />
@@ -88,7 +86,6 @@
             <delete file="catalog.xml" />
             <echo message="catalog.xml has been deleted" />
         </target>
-        <!-- target for compiling -->
         <target name="install" depends="clean, init">
             <echo message="Compile target has been called" />
             <javac srcdir="${src.dir}" destdir="${build.dir}" classpathref="lib.path.id" includeAntRuntime="false">
@@ -106,8 +103,7 @@
                 </fileset>
             </copy>
         </target>
-        <!-- target for starting server -->
-        <target name="start">
+        <target name="start" depends="install">
             <echo message="app start introsde.assignment.endpoint.PeoplePublisher in ${build.dir}" />
             <java classname="introsde.assignment.endpoint.PeoplePublisher" classpath="${build.dir}" fork="true">
                 <arg value="$JAVA_OPTS  -cp" />
@@ -120,18 +116,15 @@
                 </classpath>
             </java>
         </target>
-        <!-- target for executing client -->
-        <target name="execute.client" depends="install">
-            <echo message="ant execute.client introsde.assignment.client.PeopleClient in ${build.dir}" />
-            <java classname="introsde.assignment.client.PeopleClient" classpath="${build.dir}" fork="true">
-                <arg value="$JAVA_OPTS  -cp" />
-                <classpath>
-                    <path location="build" />
-                    <fileset dir="WebContent/WEB-INF/lib">
-                        <include name="**/*.jar" />
-                        <include name="*.jar" />
-                    </fileset>
-                </classpath>
-            </java>
+       
+        <!-- make sure you have created first the WebContent folder, including a META-INF folder, WEB-INF/web.xml file and WEB-INF/lib folder -->
+        <target name="create.war" depends="install">
+            <war destfile="LocalDatabaseService.war" webxml="${web.dir}/WebContent/WEB-INF/web.xml">
+                <fileset dir="${web.dir}/WebContent">
+                    <include name="**/*.*" />
+                </fileset>
+                <classes dir="${build.dir}" />
+            </war>
         </target>
+
     </project>
