@@ -16,6 +16,7 @@ Used technologies:
 
 This repository contains only the Server project.
 
-The server is deployed @ https://enigmatic-chamber-18596.herokuapp.com/ws/people?wsdl
+The server is deployed by my partner is @ https://enigmatic-chamber-18596.herokuapp.com/ws/people?wsdl
+The server is deployed by me is @ https://salty-beach-23970.herokuapp.com/ws/people?wsdl
 
 Link to client side @ https://github.com/hisyamsaimin/introsde-2016-assignment-3-client
