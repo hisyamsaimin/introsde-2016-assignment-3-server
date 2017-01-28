@@ -5,7 +5,7 @@ Student name: Muhamad Hisyam bin Saimin
 
 Email: muhamad.binsaimin@studenti.unitn.it
 
-For this assigment I worked with my best friend Chukwudi Uzoma https://github.com/ChukwudiUzoma
+For this assigment I worked alone
 
 Used technologies: 
 *SOAP
@@ -15,8 +15,6 @@ Used technologies:
 *Java Persistence API (JPA)
 
 This repository contains only the Server project.
-
-The server is deployed by my partner is @ https://enigmatic-chamber-18596.herokuapp.com/ws/people?wsdl
 
 The server deployed by me is @ https://salty-beach-23970.herokuapp.com/ws/people?wsdl
 
